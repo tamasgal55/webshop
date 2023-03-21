@@ -19,7 +19,7 @@ function changeLanguage(langCode: string) {
     if(store.user.isLoggedIn)
     {
         store.user.language = langCode
-        axios.put('/api/user/language', {langCode: langCode})
+        axios.put('/api/users/language', {langCode: langCode})
     }
     localStorage.setItem('language', langCode)
 }

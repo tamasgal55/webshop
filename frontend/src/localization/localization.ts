@@ -5,7 +5,8 @@ export const messages = {
         'Unauthenticated.': 'Your session has expired. Please log in again!',
         'These credentials do not match our records.': 'You have entered an invalid email or password.',
         navbar: {
-            advertisements: 'Advertisements'
+            advertisements: 'Advertisements',
+            list_a_product: 'List a product'
         },
         login: {
             sign_in: 'Sign In',
@@ -39,6 +40,13 @@ export const messages = {
             address_city: 'City',
             address_address_line: 'Address'
         },
+        list_a_product: {
+            list_a_product: 'List a product',
+            name: 'Name',
+            price: 'Price',
+            description: 'Description',
+            add_image: 'Add image'
+        },
         toast: {
             error: 'Error'
         }
@@ -48,7 +56,8 @@ export const messages = {
         'Unauthenticated.': 'Az Ön munkamenete lejárt. Kérjük, jelentkezzen be újra!',
         'These credentials do not match our records.': 'Érvénytelen e-mail címet vagy jelszót adott meg.',
         navbar: {
-            advertisements: 'Hírdetések'
+            advertisements: 'Hírdetések',
+            list_a_product: 'Hírdetésfeladás'
         },
         login: {
             sign_in: 'Bejelentkezés',
@@ -82,6 +91,13 @@ export const messages = {
             address_city: 'Város',
             address_address_line: 'Cím'
 
+        },
+        list_a_product: {
+            list_a_product: 'Hírdetésfeladás',
+            name: 'Név',
+            price: 'Ár',
+            description: 'Leírás',
+            add_image: 'Kép hozzáadása'
         },
         toast: {
             error: 'Hiba'

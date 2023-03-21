@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::get('/refresh', [AuthenticatedSessionController::class, 'show']);
-Route::put('/user/language', [UserController::class, 'updateLanguage']);
+Route::put('/users/language', [UserController::class, 'updateLanguage']);
 
+Route::get('/products', [ProductController::class, 'index']);

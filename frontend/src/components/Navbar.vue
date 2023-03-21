@@ -11,6 +11,7 @@ const t = useI18n().t
 
 const navigation = [
     { name: 'advertisements', href: '/advertisements', current: true },
+    { name: 'list_a_product', href: '/list_a_product', current: false }
 ]
 
 const store = useUserStore()
