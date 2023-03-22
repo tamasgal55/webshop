@@ -8,19 +8,22 @@ export const messages = {
             advertisements: 'Advertisements'
         },
         login: {
-            sign_in: 'Sign In',
+            login: 'Login',
             password: 'Password',
-            sign_up_question: 'Don\'t have an account ?',
-            sign_up: 'Sign Up',
-            submit_login: 'Sign In'
+            register_question: 'Don\'t have an account ?',
+            register: 'Register',
+            submit_login: 'Login',
+            forgot_password: 'Forgot password?',
+            login_comment: 'Sign in to your account'
         },
         register: {
-            sign_up: 'Sign Up',
+            register: 'Register',
+            register_comment: 'Create New Account',
             password: 'Password',
             password_confirmation: 'Password confirmation',
-            sign_in_question: 'Already have an account ?',
-            sign_in: 'Sign In',
-            submit_registration: 'Sign Up',
+            login_question: 'Already have an account ?',
+            login: 'Login',
+            submit_registration: 'Register',
             name: 'Name'
         },
         profile: {
@@ -29,7 +32,7 @@ export const messages = {
             login: 'Login',
             register: 'Registration',
             personal_information: 'Personal information',
-            personal_information_comment: 'This information will be displayed publicly so be careful what you share.',
+            personal_information_comment: 'This information will be displayed publicly so be careful what you share!',
             last_name: 'Last name',
             first_name: 'First name',
             email_address: 'E-mail address',
@@ -51,18 +54,21 @@ export const messages = {
             advertisements: 'Hírdetések'
         },
         login: {
-            sign_in: 'Bejelentkezés',
+            login: 'Bejelentkezés',
             password: 'Jelszó',
-            sign_up_question: 'Nincs fiókod ?',
-            sign_up: 'Regisztrálj',
-            submit_login: 'Bejelentkezés'
+            register_question: 'Nincs fiókod ?',
+            register: 'Regisztrálj',
+            submit_login: 'Bejelentkezés',
+            forgot_password: 'Elfejeltett jelszó?',
+            login_comment: 'Lépj be a fiókodba'
         },
         register: {
-            sign_up: 'Regisztráció',
+            register: 'Regisztráció',
+            register_comment: 'Új fiók létrehozása',
             password: 'Jelszó',
             password_confirmation: 'Jelszó megerősítése',
-            sign_in_question: 'Már van fiókod ?',
-            sign_in: 'Jelentkezz be',
+            login_question: 'Már van fiókod ?',
+            login: 'Jelentkezz be',
             submit_registration: 'Regisztráció',
             name: 'Név'
         },
@@ -72,7 +78,7 @@ export const messages = {
             login: 'Bejelentkezés',
             register: 'Regisztráció',
             personal_information: 'Személyes adatok',
-            personal_information_comment: 'Ezek az információk publikusak, ezért legyen óvatos mit oszt meg.',
+            personal_information_comment: 'Ezek az információk publikusak, ezért legyen óvatos mit oszt meg!',
             last_name: 'Vezetéknév',
             first_name: 'Keresztnév',
             email_address: 'E-mail cím',
