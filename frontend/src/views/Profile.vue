@@ -34,10 +34,10 @@ function updateProfile(){
           <p class="mt-1 text-sm text-light-text-muted dark:text-dark-text-muted">{{$t('profile.personal_information_comment')}}</p>
         </div>
       </div>
-      <div class="mt-5 md:col-span-2 md:mt-0 border border-light-border dark:border-dark-border">
+      <div class="mt-5 md:col-span-2 md:mt-0 border rounded border-light-border dark:border-dark-border bg-light-bg-1 dark:bg-dark-bg-1">
         <FormKit type="form" :actions="false" @submit="updateProfile">
           <div class="overflow-hidden shadow sm:rounded-md">
-            <div class="bg-white dark:bg-dark-bg-2 px-4 py-5 sm:p-6">
+            <div class="px-4 py-5 sm:p-6">
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
@@ -95,13 +95,11 @@ function updateProfile(){
                 </div>
               </div>
             </div>
-            <div class="bg-gray-50 dark:bg-gray-800 px-4 py-3 text-right sm:px-6 flex flex-row-reverse">
-              <div class="w-30">
-                <FormKit
-                  type="submit"
-                  label="Save"
-                />
-              </div>
+            <div class="bg-[#f4f5fb] dark:bg-[#191f48] px-4 text-right sm:px-6 flex flex-row-reverse">
+              <FormKit
+                type="submit"
+                label="Save"
+              />
             </div>
           </div>
         </FormKit>

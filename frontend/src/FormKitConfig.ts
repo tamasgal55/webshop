@@ -16,11 +16,13 @@ const FormKitConfig = defaultConfig({
             global: {
                 wrapper: '$reset',
                 outer: '',
-                label: 'text-light-text-muted dark:text-dark-text-muted',
-                inner: '$reset relative items-center flex flex-1 rounded border-slate-300 border-2 focus-within:border-red-original focus-within:border-opacity-50',
+                label: 'text-light-text dark:text-dark-text',
+                inner: '$reset relative items-center flex flex-1 rounded border border-light-border dark:border-dark-border focus-within:border-light-text dark:focus-within:border-dark-text',
                 input: '!w-full !h-full dark:text-white', 
                 help: '',
-                message: '!text-red-original dark:red-original'
+                messages: '!bg-error !bg-opacity-[.15] !mt-1',
+                message: '!text-error !pl-2',
+                prefixIcon: '$reset w-10 flex self-stretch grow-0 shrink-0 rounded-tl rounded-bl border-r border-light-border dark:border-dark-border bg-light-bg-2 dark:bg-dark-bg-2 [&>svg]:w-full [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto'
             },
             email: {
                 wrapper: '',
@@ -35,7 +37,7 @@ const FormKitConfig = defaultConfig({
                 outer: '!mt-5',
                 label: '',
                 inner: '',
-                input: '$reset hover:bg-red-darker w-full rounded-md border border-transparent bg-red-original py-2 px-4 text-sm font-medium text-white focus:outline-none', 
+                input: '$reset w-full rounded-md border border-transparent bg-button hover:bg-button-hover py-2 px-4 text-sm font-medium text-white focus:outline-none', 
                 help: ''
             },
             select: {
