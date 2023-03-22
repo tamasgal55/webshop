@@ -43,7 +43,7 @@ async function changeLanguage(langCode: string) {
 </script>
 <template>
     <Toast/>
-    <div id="page" class="text-light-text dark:text-dark-text bg-light-bg-2 dark:bg-dark-bg-2 min-h-screen">
+    <div id="page" class="text-light-text dark:text-dark-text bg-light-bg-2 dark:bg-dark-bg-2 min-h-screen pb-5">
         <router-view/>
     </div>
 </template>
