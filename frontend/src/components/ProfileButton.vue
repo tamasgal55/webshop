@@ -33,7 +33,7 @@ async function onLogout() {
                 leave-to-class="transform scale-95 opacity-0"
             >
                 <MenuItems class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-dark-bg-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div v-if="store.user.isLoggedIn">
+                    <div v-if="store.userIsLoggedIn">
                         <div>
                             <MenuItem v-slot="{ active }">
                                 <router-link to="/profile">

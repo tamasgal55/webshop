@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use \App\Models\Language;
+use \App\Models\Product;
 use \App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ['code' => 'en']
         );
 
+        // \App\Models\User::factory(10)->create();
 
         DB::table('addresses')->updateOrInsert(
             [
@@ -36,14 +37,13 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // \App\Models\User::factory(10)->create();
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
 
-        DB::table('products')->updateOrInsert(
+
+        /*DB::table('products')->updateOrInsert(
             [
                 'name' => 'Product',
                 'price' => '1000',
@@ -54,11 +54,13 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        Product::factory(30)->create();
+
         DB::table('images')->updateOrInsert(
             [
                 'image' => 'base_64 image',
                 'product_id' => 1
             ]
-        );
+        );*/
     }
 }

@@ -2,23 +2,36 @@
 import axios from '../axios'
 import { useUserStore } from '../store'
 import { onMounted, ref } from 'vue'
+import { IUserProfile } from '../interfaces/IUserProfile'
 
-
-const userProfile = ref({
-    phone: '',
-    private_phone: ''
-})
 const store = useUserStore()
+const userProfile = ref<IUserProfile>({} as IUserProfile)
+
 
 onMounted(() => {
-
+  getUserProfile()
 })
 
-function updateProfile(){
-    if(store.user.isLoggedIn)
-    {
-        axios.put('/user/profile', {userProfile: userProfile.value})
+async function getUserProfile() {
+  try {
+      const response = await axios.get('/api/user/profile')
+      if(response) {
+          userProfile.value = {...response.data.data}
+      }
+  } catch(error) {
+      console.log(error)
+  }
+}
+
+async function updateProfile(){
+  try{
+    const response = await axios.put('/api/user/profile', {userProfile: userProfile.value})
+    if(response){
+      getUserProfile()
     }
+  } catch(error) {
+      console.log(error)
+  }
 }
 </script>
 
@@ -34,22 +47,17 @@ function updateProfile(){
           <p class="mt-1 text-sm text-light-text-muted dark:text-dark-text-muted">{{$t('profile.personal_information_comment')}}</p>
         </div>
       </div>
-      <div class="mt-5 md:col-span-2 md:mt-0 border rounded border-light-border dark:border-dark-border bg-light-bg-1 dark:bg-dark-bg-1">
+      <div class="mt-5 md:col-span-2 md:mt-0 border rounded border-light-border dark:border-dark-border bg-light-bg-1 dark:bg-dark-bg-1  shadow shadow-light-box-shadow dark:shadow-dark-box-shadow">
         <FormKit type="form" :actions="false" @submit="updateProfile">
           <div class="overflow-hidden shadow sm:rounded-md">
             <div class="px-4 py-5 sm:p-6">
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
-                    :label="$t('profile.last_name')"
+                    :label="$t('profile.name')"
                     type="text"
-                  />
-                </div>
-
-                <div class="col-span-6 sm:col-span-3">
-                  <FormKit 
-                    :label="$t('profile.first_name')"
-                    type="text"
+                    v-model="userProfile.name"
+                    validation-visibility="dirty"
                   />
                 </div>
                 
@@ -57,6 +65,7 @@ function updateProfile(){
                   <FormKit 
                     :label="$t('profile.email_address')"
                     type="text"
+                    v-model="userProfile.email"
                     disabled
                   />
                 </div>
@@ -65,6 +74,8 @@ function updateProfile(){
                   <FormKit 
                     :label="$t('profile.phone')"
                     type="text"
+                    v-model="userProfile.phone"
+                    validation-visibility="dirty"
                   />
                 </div>
 
@@ -72,6 +83,8 @@ function updateProfile(){
                   <FormKit 
                     :label="$t('profile.address_country')"
                     type="text"
+                    v-model="userProfile.country"
+                    validation-visibility="dirty"
                   />
                 </div>
 
@@ -79,18 +92,32 @@ function updateProfile(){
                   <FormKit 
                     :label="$t('profile.address_postal_code')"
                     type="number"
+                    v-model="userProfile.postal_code"
+                    validation-visibility="dirty"
                   />
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
                     :label="$t('profile.address_city')"
                     type="text"
+                    v-model="userProfile.city"
+                    validation-visibility="dirty"
                   />
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
-                    :label="$t('profile.address_address_line')"
-                    type="number"
+                    :label="$t('profile.address_address_line_one')"
+                    type="text"
+                    v-model="userProfile.address_line_one"
+                    validation-visibility="dirty"
+                  />
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                  <FormKit 
+                    :label="$t('profile.address_address_line_two')"
+                    type="text"
+                    v-model="userProfile.address_line_two"
+                    validation-visibility="dirty"
                   />
                 </div>
               </div>

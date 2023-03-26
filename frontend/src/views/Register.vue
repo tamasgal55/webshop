@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { DefaultConfigOptions } from '@formkit/vue'
 import { notify } from 'notiwind'
-import { inject, ref } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useUserStore} from '../store'
 import { FormKitNode } from '@formkit/core'
+import changeThemeEmitter from '../emitters/changeThemeEmitter'
+import changeLanguageEmitter from '../emitters/changeLanguageEmitter'
 
 const t = useI18n()
-const currentFormKitLanguage = ref('en')
-const configFormKit: DefaultConfigOptions = inject(Symbol.for('FormKitConfig')) as DefaultConfigOptions
 
 const router = useRouter()
 const store = useUserStore()
@@ -18,7 +17,7 @@ const form = ref({
     email: '',
     password: '',
     password_confirmation: '',
-    language : t.locale.value
+    langCode : t.locale.value
 })
 
 async function onRegister() {
@@ -34,21 +33,14 @@ async function onRegister() {
             title: 'Success',
             text: 'Registered successfully'
         }, 2000)
-        //changeLanguage(response.data.data.language)
+        const langCode = response.data.data.language == 1 ? 'hu' : 'en'
+        changeLanguageEmitter.emit('changeLanguage', langCode)
     }
 }
 
-function changeLanguage(langCode: string) {
-    t.locale.value = langCode
-    currentFormKitLanguage.value = langCode
-    configFormKit.locale = langCode
-    localStorage.setItem('language', langCode)
-}
-
-const emitter= inject('emitter') as any
 const theme = ref<string>(localStorage.getItem('theme') as string)
 
-emitter.on('changeTheme', (value: string) => {
+changeThemeEmitter.on('changeTheme', (value: string) => {
   theme.value = value
 })
 
@@ -80,7 +72,7 @@ const showPassword = (node: FormKitNode, e: Event) => {
                 prefix-icon='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>'
                 validation="required"
                 validation-visibility="dirty"
-                placeholder="Your Name"
+                :placeholder="$t('register.name_placeholder')"
             />
             <FormKit
                 name="E-mail"
@@ -91,7 +83,7 @@ const showPassword = (node: FormKitNode, e: Event) => {
                 validation-visibility="dirty"
             />
             <FormKit
-                :name="$t('register.password')"
+                name="password"
                 type="password"
                 v-model="form.password"
                 :placeholder="$t('register.password')"
@@ -105,7 +97,7 @@ const showPassword = (node: FormKitNode, e: Event) => {
             <FormKit
                 type="password"
                 v-model="form.password_confirmation"
-                :name="$t('register.password_confirmation')"
+                name="password_confirm"
                 :placeholder="$t('register.password_confirmation')"
                 autocomplete="off"
                 validation="required|confirm"

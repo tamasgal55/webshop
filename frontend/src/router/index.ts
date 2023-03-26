@@ -7,6 +7,7 @@ import AuthenticatedLayout from '../layouts/AuthenticatedLayout.vue'
 import GuestLayout from '../layouts/GuestLayout.vue'
 import Profile from '../views/Profile.vue'
 import AllAvailableLayout from '../layouts/AllAvailableLayout.vue'
+import ListAProduct from '../views/ListAProduct.vue'
 
 const routes: RouteRecordRaw[] = [
     {
@@ -20,6 +21,11 @@ const routes: RouteRecordRaw[] = [
                 path: '/profile',
                 name: 'Profile',
                 component: Profile
+            },
+            {
+                path: '/list_a_product',
+                name: 'ListAProduct',
+                component: ListAProduct
             }
         ]
     },
@@ -64,9 +70,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const store = useUserStore()
-    if(to.meta.requiresAuth && !store.user.isLoggedIn) {
+    if(to.meta.requiresAuth && !store.userIsLoggedIn) {
         next({ name: 'Login' })
-    } else if(store.user.isLoggedIn && to.meta.isGuest) {
+    } else if(store.userIsLoggedIn && to.meta.isGuest) {
         next({ name: 'Advertisements' })
     } else {
         next()

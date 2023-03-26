@@ -1,6 +1,6 @@
 <template>
     <NotificationGroup group="notifications">
-        <div class="fixed inset-0 flex items-start justify-end p-14 px-4 py-14 pointer-events-none">
+        <div class="fixed inset-0 flex items-start justify-end p-14 px-4 py-14 pointer-events-none z-50">
             <div class="w-full max-w-sm">
             <Notification
                 v-slot="{ notifications }"

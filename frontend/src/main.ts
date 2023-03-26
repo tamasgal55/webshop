@@ -9,10 +9,7 @@ import FormKitConfig from './FormKitConfig'
 import i18n from './localization'
 import  Notifications  from 'notiwind'
 import App from './App.vue'
-import mitt from 'mitt'
-import { IEvent } from './interfaces/IEvent'
-
-const emitter = mitt<IEvent>();
+import PrimeVue from 'primevue/config';
 
 declare module 'pinia' {
     export interface PiniaCustomProperties {
@@ -29,5 +26,5 @@ createApp(App)
     .use(i18n)
     .use(plugin, FormKitConfig)
     .use(Notifications)
-    .provide('emitter', emitter)
+    .use(PrimeVue)
     .mount('#app')
