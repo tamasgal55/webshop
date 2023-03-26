@@ -1,10 +1,12 @@
+import { IImage } from "./IImage"
+
 export interface IProduct {
-    'id'?: number,
-    'name': string,
-    'price': number,
-    'description': string,
-    'created_at': Date,
-    'updated_at': Date,
-    'user_id': number,
-    'images': string[]
+    id?: number,
+    name: string,
+    price: number,
+    description: string,
+    created_at: Date,
+    updated_at: Date,
+    user_id: number,
+    images: Array<IImage>
 }

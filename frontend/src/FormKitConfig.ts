@@ -18,8 +18,8 @@ const FormKitConfig = defaultConfig({
                 outer: '',
                 label: 'text-light-text dark:text-dark-text',
                 inner: '$reset relative items-center flex flex-1 rounded border border-light-border dark:border-dark-border focus-within:border-light-text dark:focus-within:border-dark-text',
-                input: '!w-full !h-full dark:text-white', 
-                help: '',
+                input: '!w-full !h-full dark:text-white',
+                help: 'text-light-text dark:text-dark-text',
                 messages: '!bg-error !bg-opacity-[.15] !mt-1',
                 message: '!text-error !pl-2',
                 prefixIcon: '$reset w-10 flex self-stretch grow-0 shrink-0 rounded-tl rounded-bl border-r border-light-border dark:border-dark-border bg-light-bg-2 dark:bg-dark-bg-2 [&>svg]:w-full [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto'

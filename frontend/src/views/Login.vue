@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {useUserStore} from '../store'
 import { notify } from 'notiwind'
-import { useI18n } from 'vue-i18n'
-import { DefaultConfigOptions } from '@formkit/vue'
 import { FormKitNode } from '@formkit/core'
-
-const t = useI18n()
-const currentFormKitLanguage = ref('en')
-const configFormKit: DefaultConfigOptions = inject(Symbol.for('FormKitConfig')) as DefaultConfigOptions
+import changeThemeEmitter from '../emitters/changeThemeEmitter'
+import changeLanguageEmitter from '../emitters/changeLanguageEmitter'
 
 const router = useRouter()
 const store = useUserStore()
@@ -32,22 +28,14 @@ async function onLogin() {
             title: 'Success',
             text: 'Logged in successfully'
         }, 2000)
-        //changeLanguage(response.data.data.language)
-        changeLanguage('hu')
+        const langCode = response.data.data.language_id == 1 ? 'hu' : 'en'
+        changeLanguageEmitter.emit('changeLanguage', langCode)
     }
 }
 
-function changeLanguage(langCode: string) {
-    t.locale.value = langCode
-    currentFormKitLanguage.value = langCode
-    configFormKit.locale = langCode
-    localStorage.setItem('language', langCode)
-}
-
-const emitter= inject('emitter') as any
 const theme = ref<string>(localStorage.getItem('theme') as string)
 
-emitter.on('changeTheme', (value: string) => {
+changeThemeEmitter.on('changeTheme', (value: string) => {
   theme.value = value
 })
 
@@ -59,7 +47,7 @@ const showPassword = (node: FormKitNode, e: Event) => {
 </script>
 
 <template>
-  <div class="flex min-h-full items-center justify-center ">
+  <div class="flex min-h-full items-center justify-center">
     <div class="w-full max-w-lg">
       <div class="mt-6">
         <img v-if="theme == 'dark'" class="mx-auto h-24 w-auto mb-4" src="../assets/webshop-logo-dark.png" alt="Webshop" />

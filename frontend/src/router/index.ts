@@ -70,9 +70,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const store = useUserStore()
-    if(to.meta.requiresAuth && !store.user.isLoggedIn) {
+    if(to.meta.requiresAuth && !store.userIsLoggedIn) {
         next({ name: 'Login' })
-    } else if(store.user.isLoggedIn && to.meta.isGuest) {
+    } else if(store.userIsLoggedIn && to.meta.isGuest) {
         next({ name: 'Advertisements' })
     } else {
         next()

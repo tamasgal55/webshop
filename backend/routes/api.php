@@ -24,6 +24,11 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::get('/refresh', [AuthenticatedSessionController::class, 'show']);
+
 Route::put('/users/language', [UserController::class, 'updateLanguage']);
 
+Route::get('/user/profile', [UserController::class, 'getUserProfile']);
+Route::put('/user/profile', [UserController::class, 'updateUserProfile']);
+
 Route::get('/products', [ProductController::class, 'index']);
+Route::post('products', [ProductController::class, 'store']);

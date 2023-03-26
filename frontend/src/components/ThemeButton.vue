@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, inject } from 'vue'
-
+import changeThemeEmitter from '../emitters/changeThemeEmitter'
 
 const theme = ref<string>()
 
@@ -9,13 +9,11 @@ onMounted(() => {
     document.documentElement.className = theme.value
 })
 
-const emitter= inject('emitter') as any
-
 function changeTheme() {
     theme.value = theme.value == 'light' ? 'dark' : 'light'
     localStorage.setItem('theme', theme.value)
     document.documentElement.className = theme.value
-    emitter.emit('changeTheme', theme.value)
+    changeThemeEmitter.emit('changeTheme', theme.value)
 }
 
 </script>

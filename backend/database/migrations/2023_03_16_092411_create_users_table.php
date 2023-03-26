@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignId('address_id')->constrained();
-            $table->foreignId('language_id')->constrained()->nullable();
+            $table->foreignId('address_id')->nullable()->constrained();
+            $table->foreignId('language_id')->nullable()->constrained();
         });
     }
 

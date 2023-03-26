@@ -5,24 +5,38 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import axios from '../axios'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '../store'
-import { computed, WritableComputedRef, ref, inject } from 'vue'
+import { computed, WritableComputedRef, ref, inject, onMounted } from 'vue'
+import changeLanguageEmitter from '../emitters/changeLanguageEmitter'
+import languageSelectedMountedEmitter from '../emitters/languageSelectorMountedEmitter'
+
+onMounted(() => {
+    languageSelectedMountedEmitter.emit('languageSelectorMounted', true)
+})
 
 const t = useI18n()
 const currentFormKitLanguage = ref('en')
 const configFormKit: DefaultConfigOptions = inject(Symbol.for('FormKitConfig')) as DefaultConfigOptions
 const store = useUserStore()
 
-function changeLanguage(langCode: string) {
+changeLanguageEmitter.on('changeLanguage', (value: string) => {
+  changeLanguage(value, true)
+})
+
+function changeLanguage(langCode: string, emitted = false) {
     t.locale.value = langCode
     currentFormKitLanguage.value = langCode
     configFormKit.locale = langCode
-    if(store.user.isLoggedIn)
+    if(store.userIsLoggedIn)
     {
-        store.user.language = langCode
-        axios.put('/api/users/language', {langCode: langCode})
+        store.user.language_id = langCode == 'hu' ? 1 : 2
+        if(!emitted) {
+          axios.put('/api/users/language', {langCode: langCode})
+        }
     }
     localStorage.setItem('language', langCode)
 }
+
+
 
 const countryFlagCode: WritableComputedRef<string> = computed({
     get(): string {

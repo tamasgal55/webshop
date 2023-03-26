@@ -1,44 +1,45 @@
 <script setup lang="ts">
-import { DefaultConfigOptions } from '@formkit/vue'
-import { inject, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Toast from './components/Toast.vue'
 import axios from './axios'
 import {useUserStore} from './store'
-
+import changeLanguageEmitter from './emitters/changeLanguageEmitter'
+import languageSelectedMountedEmitter from './emitters/languageSelectorMountedEmitter'
 
 const store = useUserStore()
 const t = useI18n()
-const currentFormKitLanguage = ref('en')
-const configFormKit: DefaultConfigOptions = inject(Symbol.for('FormKitConfig')) as DefaultConfigOptions
+const langCode = ref<string>('hu')
+
+const onMountedEventAlreadyTriggered = ref(false)
 
 onMounted(async () => {
     // set language from localstorage
     if(localStorage.getItem('language'))
     {
-        const langCode = localStorage.getItem('language') as string
-        changeLanguage(langCode)
+        langCode.value = localStorage.getItem('language') as string
+    } else {
+        langCode.value = 'hu'
     }
 
     const response = await axios.get('/api/refresh')
-    const userWasLoggedIn = store.user.isLoggedIn
+    const userWasLoggedIn = store.userIsLoggedIn
 
     // user was logged in before, but not anymore (session expired)
     if(userWasLoggedIn && !response.data.data)
     {
         // use user preferred language to show correct error message
-        changeLanguage(store.user.language)
+        langCode.value = store.user.language_id == 1 ? 'hu' : 'en'
         store.logout()
     }
 })
 
-
-async function changeLanguage(langCode: string) {
-    t.locale.value = langCode
-    currentFormKitLanguage.value = langCode
-    configFormKit.locale = langCode
-    localStorage.setItem('language', langCode)
-}
+languageSelectedMountedEmitter.on('languageSelectorMounted', (value: boolean) => {
+    if(!onMountedEventAlreadyTriggered.value) {
+        changeLanguageEmitter.emit('changeLanguage', langCode.value)
+        onMountedEventAlreadyTriggered.value = true
+    }
+})
 
 </script>
 <template>

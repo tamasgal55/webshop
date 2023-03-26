@@ -6,6 +6,8 @@ import LanguageSelector from './LanguageSelector.vue'
 import ProfileButton from './ProfileButton.vue'
 import { useUserStore } from '../store'
 import { useI18n } from 'vue-i18n'
+import changeThemeEmitter from '../emitters/changeThemeEmitter'
+import { ref } from 'vue'
 
 const t = useI18n().t
 
@@ -15,7 +17,7 @@ const navigation = [
 ]
 
 const store = useUserStore()
-const userLoggedIn = store.user.isLoggedIn
+const userLoggedIn = store.userIsLoggedIn
 
 if(window.location.href.includes('/'))
 {
@@ -29,10 +31,17 @@ function changeTab(href: string)
     if(navigatedTab) navigatedTab.current = true
 }
 
+
+const theme = ref<string>(localStorage.getItem('theme') as string)
+
+changeThemeEmitter.on('changeTheme', (value: string) => {
+  theme.value = value
+})
+
 </script>
 
 <template>
-  <Disclosure as="nav" class="bg-light-bg-1 dark:bg-dark-bg-1" v-slot="{ open }">
+  <Disclosure as="nav" class="bg-light-bg-1 dark:bg-dark-bg-1 shadow shadow-light-box-shadow dark:shadow-dark-box-shadow" v-slot="{ open }">
     <div class="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -43,6 +52,10 @@ function changeTab(href: string)
             <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </DisclosureButton>
         </div>
+        <router-link to="/advertisements">
+          <img v-if="theme == 'dark'" class="mx-auto h-8" src="../assets/webshop-logo-dark.png" alt="Webshop" />
+          <img v-if="theme == 'light'" class="mx-auto h-8" src="../assets/webshop-logo-light.png" alt="Webshop" />
+        </router-link>
         <div class="flex flex-1 justify-start sm:items-stretch sm:justify-start">
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4 space-y-0">

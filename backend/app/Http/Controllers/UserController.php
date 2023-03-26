@@ -34,6 +34,52 @@ class UserController extends Controller
         ]);
     }
 
+    public function updateUserProfile(Request $request) 
+    {
+        $request->validate([
+            
+        ]);
+
+        $user = User::find(auth()->user()->id);
+        $address = Address::where('id', $user->address_id)->first();
+        $user->update([
+            'name' => $request->userProfile['name'],
+            'phone' => $request->userProfile['phone']
+        ]);
+
+        $address->update([
+            'country' => $request->userProfile['country'],
+            'postal_code' => $request->userProfile['postal_code'],
+            'city' => $request->userProfile['city'],
+            'address_line_one' => $request->userProfile['address_line_one'],
+            'address_line_two' => $request->userProfile['address_line_two']
+        ]);
+
+        return response()->json([
+            'data' => $request->userProfile
+        ]);
+    }
+
+    public function getUserProfile() 
+    {
+        $user = User::find(auth()->user()->id);
+
+        $userProfile = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'country' => $user->address->country,
+            'postal_code' => $user->address->postal_code,
+            'city' => $user->address->city,
+            'address_line_one' => $user->address->address_line_one,
+            'address_line_two' => $user->address->address_line_two
+        ];
+
+        return response()->json([
+            'data' => $userProfile
+        ]);
+    }
+
     public function relationshipTestEndpoint()
     {
         return response()->json([
