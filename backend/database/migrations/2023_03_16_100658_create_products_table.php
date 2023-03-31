@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->timestamps();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('category_id')->nullable()->constrained();
         });
     }
 

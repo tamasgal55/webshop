@@ -16,11 +16,17 @@ class Product extends Model
         'price',
         'description',
         'user_id',
+        'product_id'
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category(): BelongsTo 
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function images(): HasMany

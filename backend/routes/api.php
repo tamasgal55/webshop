@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +33,6 @@ Route::get('/user/profile', [UserController::class, 'getUserProfile']);
 Route::put('/user/profile', [UserController::class, 'updateUserProfile']);
 
 Route::get('/products', [ProductController::class, 'index']);
-Route::post('products', [ProductController::class, 'store']);
+Route::post('/products', [ProductController::class, 'store']);
+
+Route::get('/categories', [CategoryController::class, 'index']);

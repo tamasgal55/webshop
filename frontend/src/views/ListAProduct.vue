@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import axios from '../axios'
 import { notify } from 'notiwind'
 import ImagesPreviewer from '../components/ImagesPreviewer.vue'
+import i18n from '../localization';
 
 const product = ref<IProduct>({} as IProduct)
 
@@ -44,7 +45,7 @@ async function createProduct () {
                 group: 'notifications',
                 type: 'success',
                 title: 'Success',
-                text: response.data.message
+                text: i18n.global.t(response.data.message)
             }, 2000)
             product.value = {} as IProduct
             uploadedImages.value = []
@@ -79,7 +80,6 @@ async function createProduct () {
                         validation="required"
                         validation-visibility="submit"
                     />
-
 
                     <FormKit 
                         :label="$t('list_a_product.description')"

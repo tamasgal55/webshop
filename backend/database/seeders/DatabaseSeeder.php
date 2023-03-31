@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use \App\Models\Product;
-use \App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
@@ -40,6 +41,36 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        DB::table('categories')->updateOrInsert([
+            'name_hu' => 'Műszaki',
+            'name_en' => 'IT'
+        ]);
+
+        DB::table('categories')->updateOrInsert([
+            'name_hu' => 'Divat',
+            'name_en' => 'Fashion'
+        ]);
+
+        DB::table('categories')->updateOrInsert([
+            'name_hu' => 'Szórakozás',
+            'name_en' => 'Entertainment'
+        ]);
+
+        DB::table('categories')->updateOrInsert([
+            'name_hu' => 'Sport',
+            'name_en' => 'Sport'
+        ]);
+
+        DB::table('categories')->updateOrInsert([
+            'name_hu' => 'Autó-Motor',
+            'name_en' => 'Vehicle'
+        ]);
+
+        DB::table('categories')->updateOrInsert([
+            'name_hu' => 'Otthon',
+            'name_en' => 'Home'
         ]);
 
 

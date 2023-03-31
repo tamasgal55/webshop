@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function getLanguage(string $id)
     {
-        return response()->json(User::findOrFail($id)->language);
+        return response()->json(['data' => User::findOrFail($id)->language]);
     }
 
     public function updateLanguage(Request $request)

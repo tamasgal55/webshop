@@ -4,6 +4,7 @@ export const messages = {
         'The selected lang code is invalid.': 'The selected language code is invalid.',
         'Unauthenticated.': 'Your session has expired. Please log in again!',
         'These credentials do not match our records.': 'You have entered an invalid email or password.',
+        'Product created': 'Product listed',
         navbar: {
             advertisements: 'Advertisements',
             list_a_product: 'List a product'
@@ -62,6 +63,7 @@ export const messages = {
         'The selected lang code is invalid.': 'A kiválasztott nyelvi kód érvénytelen.',
         'Unauthenticated.': 'Az Ön munkamenete lejárt. Kérjük, jelentkezzen be újra!',
         'These credentials do not match our records.': 'Érvénytelen e-mail címet vagy jelszót adott meg.',
+        'Product created': 'Hírdetés létrehozva',
         navbar: {
             advertisements: 'Hírdetések',
             list_a_product: 'Hírdetésfeladás'

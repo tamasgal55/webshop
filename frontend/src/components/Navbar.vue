@@ -52,11 +52,17 @@ changeThemeEmitter.on('changeTheme', (value: string) => {
             <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </DisclosureButton>
         </div>
-        <router-link to="/advertisements">
-          <img v-if="theme == 'dark'" class="mx-auto h-8" src="../assets/webshop-logo-dark.png" alt="Webshop" />
-          <img v-if="theme == 'light'" class="mx-auto h-8" src="../assets/webshop-logo-light.png" alt="Webshop" />
-        </router-link>
-        <div class="flex flex-1 justify-start sm:items-stretch sm:justify-start">
+        <!--<div class="flex flex-1 justify-start sm:items-stretch sm:justify-start">-->
+        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+          <div class="flex flex-shrink-0 items-center">
+            <router-link to="/advertisements">
+              <img v-if="theme == 'dark'" class="block h-8 w-auto lg:hidden" src="../assets/webshop-logo-dark.png" alt="Webshop" />
+              <img v-if="theme == 'light'" class="block h-8 w-auto lg:hidden" src="../assets/webshop-logo-light.png" alt="Webshop" />
+              <img v-if="theme == 'dark'" class="hidden h-8 w-auto lg:block" src="../assets/webshop-logo-dark.png" alt="Webshop" />
+              <img v-if="theme == 'light'" class="hidden h-8 w-auto lg:block" src="../assets/webshop-logo-light.png" alt="Webshop" />
+            </router-link>
+          </div>
+          
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4 space-y-0">
               <router-link v-for="item in navigation" :key="item.href" :to="item.href">
@@ -77,7 +83,7 @@ changeThemeEmitter.on('changeTheme', (value: string) => {
     <DisclosurePanel class="sm:hidden">
       <div class="space-y-1 px-2 pt-2 pb-3">
           <router-link v-for="item in navigation" :key="item.href" :to="item.href">
-              <DisclosureButton @click="changeTab(item.href)" as="a" :href="item.href" :class="[item.current ? 'bg-button-hover dark:bg-gray-600 text-white' : 'text-gray-500 dark:text-white hover:bg-button dark:hover:bg-gray-500 hover:text-white dark:hover:text-gray-100', 'block px-3 py-2 rounded-md text-base font-medium']">{{ item.name }}</DisclosureButton>
+              <DisclosureButton @click="changeTab(item.href)" as="a" :href="item.href" :class="[item.current ? 'bg-button-hover dark:bg-gray-600 text-white' : 'text-gray-500 dark:text-white hover:bg-button dark:hover:bg-gray-500 hover:text-white dark:hover:text-gray-100', 'block px-3 py-2 rounded-md text-base font-medium']">{{ $t(`navbar.${item.name}`) }}</DisclosureButton>
           </router-link>
       </div>
     </DisclosurePanel>
