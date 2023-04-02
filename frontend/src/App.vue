@@ -6,7 +6,39 @@ import axios from './axios'
 import {useUserStore} from './store'
 import changeLanguageEmitter from './emitters/changeLanguageEmitter'
 import languageSelectedMountedEmitter from './emitters/languageSelectorMountedEmitter'
+import Echo from "laravel-echo"
+import Pusher from 'pusher-js'
 
+window.Pusher = Pusher
+
+/*window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '2cd59189a342f970e8ad',
+    cluster: 'eu',
+    forceTLS: false,
+    disableStats: true,
+})
+
+window.Echo.channel('test-channel')
+    .listen('testEvent', (e:any) => {
+        console.log('NOTIFIED');
+    });
+*/
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'pusher-app-key',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true,
+    cluster: 'eu'
+})
+
+window.Echo.channel('test-channel')
+    .listen('testEvent', (e:any) => {
+        console.log('NOTIFIED');
+    });
 const store = useUserStore()
 const t = useI18n()
 const langCode = ref<string>('hu')

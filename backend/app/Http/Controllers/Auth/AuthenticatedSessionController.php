@@ -9,11 +9,13 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Events\testEvent;
 
 class AuthenticatedSessionController extends Controller
 {
     public function show(): JsonResponse 
     {
+        testEvent::dispatch('teszt üzenet');
         return response()->json([
             'data' => auth()->user()
         ]);
