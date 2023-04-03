@@ -8,6 +8,7 @@ import GuestLayout from '../layouts/GuestLayout.vue'
 import Profile from '../views/Profile.vue'
 import AllAvailableLayout from '../layouts/AllAvailableLayout.vue'
 import ListAProduct from '../views/ListAProduct.vue'
+import CreateCompany from '../views/CreateCompany.vue'
 
 const routes: RouteRecordRaw[] = [
     {
@@ -26,6 +27,11 @@ const routes: RouteRecordRaw[] = [
                 path: '/list_a_product',
                 name: 'ListAProduct',
                 component: ListAProduct
+            },
+            {
+                path: '/create_company',
+                name: 'CreateCompany',
+                component: CreateCompany
             }
         ]
     },

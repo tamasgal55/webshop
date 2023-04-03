@@ -126,6 +126,7 @@ async function updateProfile(){
               <FormKit
                 type="submit"
                 label="Save"
+                outer-class="!mt-5"
               />
             </div>
           </div>

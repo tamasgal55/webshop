@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { ArrowLeftOnRectangleIcon, Cog8ToothIcon} from '@heroicons/vue/24/outline'
+import { ArrowLeftOnRectangleIcon, Cog8ToothIcon, BuildingOfficeIcon} from '@heroicons/vue/24/outline'
 import { useUserStore } from '../store'
-import { ref } from 'vue'
 
 const store = useUserStore()
 async function onLogout() {
@@ -32,7 +31,7 @@ async function onLogout() {
                 leave-from-class="transform scale-100 opacity-100"
                 leave-to-class="transform scale-95 opacity-0"
             >
-                <MenuItems class="absolute right-0 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-dark-bg-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <MenuItems class="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-dark-bg-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div v-if="store.userIsLoggedIn">
                         <div>
                             <MenuItem v-slot="{ active }">
@@ -40,6 +39,16 @@ async function onLogout() {
                                     <a @click="$emit('profileNavigation')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
                                         <Cog8ToothIcon :active="active" class="mr-2 h-5 w-5" aria-hidden="true" />
                                         {{$t('profile.profile')}}
+                                    </a>
+                                </router-link>
+                            </MenuItem>
+                        </div>
+                        <div>
+                            <MenuItem v-slot="{ active }">
+                                <router-link to="/create_company">
+                                    <a @click="$emit('profileNavigation')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
+                                        <BuildingOfficeIcon :active="active" class="mr-2 h-5 w-5" aria-hidden="true" />
+                                        {{$t('profile.create_company')}}
                                     </a>
                                 </router-link>
                             </MenuItem>

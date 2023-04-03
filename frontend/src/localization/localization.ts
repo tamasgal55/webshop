@@ -6,7 +6,7 @@ export const messages = {
         'These credentials do not match our records.': 'You have entered an invalid email or password.',
         navbar: {
             advertisements: 'Advertisements',
-            list_a_product: 'List a product'
+            our_partners: 'Our partners'
         },
         login: {
             login: 'Login',
@@ -42,7 +42,8 @@ export const messages = {
             address_postal_code: 'Postal code',
             address_city: 'City',
             address_address_line_one: 'Address line 1',
-            address_address_line_two: 'Address line 2'
+            address_address_line_two: 'Address line 2',
+            create_company: 'Create company'
         },
         list_a_product: {
             list_a_product: 'List a product',
@@ -54,6 +55,10 @@ export const messages = {
             new_advertisement: 'New advertisement',
             price_help: 'The price is in Hungarian forints'
         },
+        create_company: {
+            title: 'Create your own webshop',
+            submit_label: 'Create'
+        },
         toast: {
             error: 'Error'
         }
@@ -64,7 +69,7 @@ export const messages = {
         'These credentials do not match our records.': 'Érvénytelen e-mail címet vagy jelszót adott meg.',
         navbar: {
             advertisements: 'Hírdetések',
-            list_a_product: 'Hírdetésfeladás'
+            our_partners: 'Partnereink'
         },
         login: {
             login: 'Bejelentkezés',
@@ -100,7 +105,8 @@ export const messages = {
             address_postal_code: 'Irányítószám',
             address_city: 'Város',
             address_address_line_one: 'Címsor 1',
-            address_address_line_two: 'Címsor 2'
+            address_address_line_two: 'Címsor 2',
+            create_company: 'Cég létrehozása'
 
         },
         list_a_product: {
@@ -112,6 +118,10 @@ export const messages = {
             add_image_help: 'Több képet is kiválaszhat',
             new_advertisement: 'Új hírdetés',
             price_help: 'Az ár forintban értendő'
+        },
+        create_company: {
+            title: 'Hozd létre a saját Webshopod',
+            submit_label: 'Létrehozás'
         },
         toast: {
             error: 'Hiba'

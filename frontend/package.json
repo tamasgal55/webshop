@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@floating-ui/vue": "^0.2.1",
+    "@formkit/addons": "^0.16.4",
     "@formkit/i18n": "^1.0.0-beta.15",
     "@formkit/icons": "^1.0.0-beta.15",
     "@formkit/tailwindcss": "^1.0.0-beta.15",

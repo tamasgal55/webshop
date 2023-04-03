@@ -4,6 +4,8 @@ import { hu,en } from '@formkit/i18n'
 import { down } from '@formkit/icons'
 import './style.css'
 import '@formkit/themes/genesis'
+import { createMultiStepPlugin } from '@formkit/addons'
+import '@formkit/addons/css/multistep'
 
 const isVowel = (x: string) => !!x.match(/[aAáÁeEéÉiIíÍoOóÓöÖőŐuUúÚüÜűŰ]/i)
 
@@ -13,7 +15,7 @@ const FormKitConfig = defaultConfig({
     locale: 'hu',
     config: {
         classes: generateClasses({
-            global: {
+            /*global: {
                 wrapper: '$reset',
                 outer: '',
                 label: 'text-light-text dark:text-dark-text',
@@ -23,7 +25,7 @@ const FormKitConfig = defaultConfig({
                 messages: '!bg-error !bg-opacity-[.15] !mt-1',
                 message: '!text-error !pl-2',
                 prefixIcon: '$reset w-10 flex self-stretch grow-0 shrink-0 rounded-tl rounded-bl border-r border-light-border dark:border-dark-border bg-light-bg-2 dark:bg-dark-bg-2 [&>svg]:w-full [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto'
-            },
+            },*/
             email: {
                 wrapper: '',
                 outer: '',
@@ -34,7 +36,7 @@ const FormKitConfig = defaultConfig({
             },
             submit: {
                 wrapper: '',
-                outer: '!mt-5',
+                outer: '',
                 label: '',
                 inner: '',
                 input: '$reset w-full rounded-md border border-transparent bg-button hover:bg-button-hover py-2 px-4 text-sm font-medium text-white focus:outline-none', 
@@ -60,7 +62,8 @@ const FormKitConfig = defaultConfig({
                 }
             }
         }
-    }
+    },
+    plugins: [createMultiStepPlugin()]
 })
 
 export default FormKitConfig
