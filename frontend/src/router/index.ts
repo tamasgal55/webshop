@@ -9,6 +9,12 @@ import Profile from '../views/Profile.vue'
 import AllAvailableLayout from '../layouts/AllAvailableLayout.vue'
 import ListAProduct from '../views/ListAProduct.vue'
 import CreateCompany from '../views/CreateCompany.vue'
+import OurPartners from '../views/OurPartners.vue'
+import CompanyManagementStart from '../views/CompanyManagement/Start.vue'
+import CompanyManagementCategories from '../views/CompanyManagement/Categories.vue'
+import CompanyManagementProducts from '../views/CompanyManagement/Products.vue'
+import AdminCategories from '../views/Admin/Categories.vue'
+import AdminAttributes from '../views/Admin/Attributes.vue'
 
 const routes: RouteRecordRaw[] = [
     {
@@ -32,6 +38,31 @@ const routes: RouteRecordRaw[] = [
                 path: '/create_company',
                 name: 'CreateCompany',
                 component: CreateCompany
+            },
+            {
+                path: '/management/start',
+                name: 'CompanyManagementStart',
+                component: CompanyManagementStart
+            },
+            {
+                path: '/management/categories',
+                name: 'CompanyManagementCategories',
+                component: CompanyManagementCategories
+            },
+            {
+                path: '/management/products',
+                name: 'CompanyManagementProducts',
+                component: CompanyManagementProducts
+            },
+            {
+                path: '/admin/attributes',
+                name: 'AdminAttributes',
+                component: AdminAttributes
+            },
+            {
+                path: '/admin/categories',
+                name: 'AdminCategories',
+                component: AdminCategories
             }
         ]
     },
@@ -64,6 +95,11 @@ const routes: RouteRecordRaw[] = [
                 path: '/advertisements',
                 name: 'Advertisements',
                 component: Advertisements
+            },
+            {
+                path: '/our_partners',
+                name: 'OurPartners',
+                component: OurPartners
             }
         ]
     }

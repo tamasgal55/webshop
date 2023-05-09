@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('address_id')->nullable()->constrained();
             $table->foreignId('language_id')->nullable()->constrained();
+            $table->foreignId('company_id')->nullable()->constrained();
         });
     }
 

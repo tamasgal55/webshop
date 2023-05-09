@@ -85,7 +85,7 @@ function show() {
     <div
       ref="floatingRef"
       :class="[
-        'absolute top-0 left-0 z-50 bg-red-darker dark:bg-gray-700 text-sm text-white px-3 py-1.5 rounded-md cursor-default',
+        'absolute top-0 left-0 z-50 bg-gray-700 dark:bg-gray-700 text-sm text-white px-3 py-1.5 rounded-md cursor-default',
         isHidden && 'hidden',
       ]"
     >

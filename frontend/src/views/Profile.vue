@@ -81,7 +81,7 @@ async function updateProfile(){
 
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
-                    :label="$t('profile.address_country')"
+                    :label="$t('address.country')"
                     type="text"
                     v-model="userProfile.country"
                     validation-visibility="dirty"
@@ -90,7 +90,7 @@ async function updateProfile(){
 
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
-                    :label="$t('profile.address_postal_code')"
+                    :label="$t('address.postal_code')"
                     type="number"
                     v-model="userProfile.postal_code"
                     validation-visibility="dirty"
@@ -98,7 +98,7 @@ async function updateProfile(){
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
-                    :label="$t('profile.address_city')"
+                    :label="$t('address.city')"
                     type="text"
                     v-model="userProfile.city"
                     validation-visibility="dirty"
@@ -106,7 +106,7 @@ async function updateProfile(){
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
-                    :label="$t('profile.address_address_line_one')"
+                    :label="$t('address.address_line_one')"
                     type="text"
                     v-model="userProfile.address_line_one"
                     validation-visibility="dirty"
@@ -114,7 +114,7 @@ async function updateProfile(){
                 </div>
                 <div class="col-span-6 sm:col-span-3">
                   <FormKit 
-                    :label="$t('profile.address_address_line_two')"
+                    :label="$t('address.address_line_two')"
                     type="text"
                     v-model="userProfile.address_line_two"
                     validation-visibility="dirty"

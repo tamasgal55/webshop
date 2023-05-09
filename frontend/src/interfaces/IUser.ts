@@ -6,6 +6,7 @@ export interface IUser {
     phone?: string,
     address_id?: number,
     language_id?: number,
+    company_id?: number,
     created_at: Date,
     updated_at: Date
 }

@@ -15,37 +15,75 @@ const FormKitConfig = defaultConfig({
     locale: 'hu',
     config: {
         classes: generateClasses({
-            /*global: {
+            email: {
                 wrapper: '$reset',
                 outer: '',
                 label: 'text-light-text dark:text-dark-text',
                 inner: '$reset relative items-center flex flex-1 rounded border border-light-border dark:border-dark-border focus-within:border-light-text dark:focus-within:border-dark-text',
-                input: '!w-full !h-full dark:text-white',
+                input: '!w-full !h-full text-light-text dark:text-dark-text', 
                 help: 'text-light-text dark:text-dark-text',
                 messages: '!bg-error !bg-opacity-[.15] !mt-1',
                 message: '!text-error !pl-2',
                 prefixIcon: '$reset w-10 flex self-stretch grow-0 shrink-0 rounded-tl rounded-bl border-r border-light-border dark:border-dark-border bg-light-bg-2 dark:bg-dark-bg-2 [&>svg]:w-full [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto'
-            },*/
-            email: {
-                wrapper: '',
+            },
+            text: {
+                wrapper: '$reset',
                 outer: '',
-                label: '',
-                inner: '',
-                input: '', 
-                help: ''
+                label: 'text-light-text dark:text-dark-text',
+                inner: '$reset relative items-center flex flex-1 rounded border border-light-border dark:border-dark-border focus-within:border-light-text dark:focus-within:border-dark-text',
+                input: '!w-full !h-full text-light-text dark:text-dark-text', 
+                help: 'text-light-text dark:text-dark-text',
+                messages: '!bg-error !bg-opacity-[.15] !mt-1',
+                message: '!text-error !pl-2',
+                prefixIcon: '$reset w-10 flex self-stretch grow-0 shrink-0 rounded-tl rounded-bl border-r border-light-border dark:border-dark-border bg-light-bg-2 dark:bg-dark-bg-2 [&>svg]:w-full [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto'
+            },
+            password: {
+                wrapper: '$reset',
+                outer: '',
+                label: 'text-light-text dark:text-dark-text',
+                inner: '$reset relative items-center flex flex-1 rounded border border-light-border dark:border-dark-border focus-within:border-light-text dark:focus-within:border-dark-text',
+                input: '!w-full !h-full text-light-text dark:text-dark-text', 
+                help: 'text-light-text dark:text-dark-text',
+                messages: '!bg-error !bg-opacity-[.15] !mt-1',
+                message: '!text-error !pl-2',
+                prefixIcon: '$reset w-10 flex self-stretch grow-0 shrink-0 rounded-tl rounded-bl border-r border-light-border dark:border-dark-border bg-light-bg-2 dark:bg-dark-bg-2 [&>svg]:w-full [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto'
+            },
+            number: {
+                wrapper: '$reset',
+                outer: '',
+                label: 'text-light-text dark:text-dark-text',
+                inner: '$reset relative items-center flex flex-1 rounded border border-light-border dark:border-dark-border focus-within:border-light-text dark:focus-within:border-dark-text',
+                input: '!w-full !h-full text-light-text dark:text-dark-text', 
+                help: 'text-light-text dark:text-dark-text',
+                messages: '!bg-error !bg-opacity-[.15] !mt-1',
+                message: '!text-error !pl-2',
+                prefixIcon: '$reset w-10 flex self-stretch grow-0 shrink-0 rounded-tl rounded-bl border-r border-light-border dark:border-dark-border bg-light-bg-2 dark:bg-dark-bg-2 [&>svg]:w-full [&>svg]:max-w-[1em] [&>svg]:max-h-[1em] [&>svg]:m-auto'
             },
             submit: {
-                wrapper: '',
+                wrapper: '$reset',
                 outer: '',
-                label: '',
-                inner: '',
+                label: 'text-light-text dark:text-dark-text',
+                inner: '$reset relative items-center flex flex-1 rounded border border-light-border dark:border-dark-border focus-within:border-light-text dark:focus-within:border-dark-text',
                 input: '$reset w-full rounded-md border border-transparent bg-button hover:bg-button-hover py-2 px-4 text-sm font-medium text-white focus:outline-none', 
                 help: ''
             },
             select: {
-                selectIcon: 'text-black-400'
+                wrapper: '$reset',
+                outer: '',
+                label: 'text-light-text dark:text-dark-text',
+                help: 'text-light-text dark:text-dark-text',
+
+                messages: '!bg-error !bg-opacity-[.15] !mt-1',
+                message: '!text-error !pl-2',
+            },
+            file: {
+                messages: '!bg-error !bg-opacity-[.15] !mt-1',
+                message: '!text-error !pl-2',
+            },
+            'family:multi-step': {
+                outer: '!m-0'
             }
-        })
+      })
     },
     icons: { down },
     messages: {

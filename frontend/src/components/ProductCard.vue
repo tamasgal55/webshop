@@ -20,7 +20,6 @@
   
 <script setup lang="ts">
 import { IProduct } from '../interfaces/IProduct'
-import Image from 'primevue/image'
 
 interface Props {
   product: IProduct

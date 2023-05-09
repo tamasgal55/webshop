@@ -8,12 +8,28 @@ import { useUserStore } from '../store'
 import { useI18n } from 'vue-i18n'
 import changeThemeEmitter from '../emitters/changeThemeEmitter'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const t = useI18n().t
+
+const isCompanyManagementPanel = ref(false)
+const isAdminPanel = ref(false)
 
 const navigation = [
     { name: 'advertisements', href: '/advertisements', current: true },
-    { name: 'our_partners', href: '/our_partners', current: false }
+    { name: 'our_partners', href: '/our_partners', current: false },
+]
+
+const adminNavigation = [
+    { name: 'categories', href: '/admin/categories', current: true },
+    { name: 'attributes', href: '/admin/attributes', current: false }
+]
+
+const companyManagementNavigation = [
+    { name: 'start', href: '/management/start', current: false },
+    { name: 'categories', href: '/management/categories', current: false },
+    { name: 'products', href: '/management/products', current: false }
 ]
 
 const store = useUserStore()
@@ -24,11 +40,45 @@ if(window.location.href.includes('/'))
     changeTab('/'+window.location.href.split('/').pop() as string)
 }
 
+if(window.location.href.includes('management'))
+{
+  isCompanyManagementPanel.value = true
+}
+else if(window.location.href.includes('admin'))
+{
+  isAdminPanel.value = true
+}
+
+changeTab(window.location.pathname)
+
+
 function changeTab(href: string)
 {
     navigation.find(element => element.current = false)
-    const navigatedTab = navigation.find(element => element.href == href)
-    if(navigatedTab) navigatedTab.current = true
+    adminNavigation.find(element => element.current = false)
+    companyManagementNavigation.find(element => element.current = false)
+    const navigatedTab = ref()
+    if(navigation.find(element => element.href == href)) 
+    {
+      navigatedTab.value = navigation.find(element => element.href == href)
+      isAdminPanel.value = false
+      isCompanyManagementPanel.value = false
+    }
+    else if(adminNavigation.find(element => element.href == href)) 
+    {
+      navigatedTab.value = adminNavigation.find(element => element.href == href)
+      isAdminPanel.value = true
+      isCompanyManagementPanel.value = false
+    }
+    else if(companyManagementNavigation.find(element => element.href == href)) 
+    {
+      navigatedTab.value = companyManagementNavigation.find(element => element.href == href)
+      isAdminPanel.value = false
+      isCompanyManagementPanel.value = true
+    }
+
+    if(navigatedTab.value) navigatedTab.value.current = true
+    router.push(href)
 }
 
 
@@ -55,7 +105,7 @@ changeThemeEmitter.on('changeTheme', (value: string) => {
         <!--<div class="flex flex-1 justify-start sm:items-stretch sm:justify-start">-->
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex flex-shrink-0 items-center">
-            <router-link to="/advertisements">
+            <router-link to="/advertisements" @click="changeTab('/advertisements')">
               <img v-if="theme == 'dark'" class="block h-8 w-auto lg:hidden" src="../assets/webshop-logo-dark.png" alt="Webshop" />
               <img v-if="theme == 'light'" class="block h-8 w-auto lg:hidden" src="../assets/webshop-logo-light.png" alt="Webshop" />
               <img v-if="theme == 'dark'" class="hidden h-8 w-auto lg:block" src="../assets/webshop-logo-dark.png" alt="Webshop" />
@@ -65,11 +115,33 @@ changeThemeEmitter.on('changeTheme', (value: string) => {
           
           <div class="hidden sm:ml-6 sm:block pt-0.5">
             <div class="flex space-x-4 space-y-0">
-              <router-link v-for="item in navigation" :key="item.href" :to="item.href">
-                  <a @click="changeTab(item.href)" :class="[item.current ? 'bg-button-hover dark:bg-gray-600 dark:text-dark-text text-white' : 'text-light-text dark:text-dark-text  hover:bg-button dark:hover:bg-gray-500 hover:text-white dark:hover:text-gray-100', 'px-3 py-2 rounded-md text-sm font-medium']">
-                    {{ $t(`navbar.${item.name}`) }}
-                  </a>
-              </router-link>
+              <template v-if="isAdminPanel">
+                <template v-for="item in adminNavigation" :key="item.name">
+                  <router-link :to="item.href">
+                      <a @click="changeTab(item.href)" :class="[item.current ? 'bg-button-hover dark:bg-gray-600 dark:text-dark-text text-white' : 'text-light-text dark:text-dark-text  hover:bg-button dark:hover:bg-gray-500 hover:text-white dark:hover:text-gray-100', 'px-3 py-2 rounded-md text-sm font-medium']">
+                        {{ $t(`navbar.${item.name}`) }}
+                      </a>
+                  </router-link>
+                </template>
+              </template>
+              <template v-else-if="isCompanyManagementPanel">
+                <template v-for="item in companyManagementNavigation" :key="item.name">
+                  <router-link :to="item.href">
+                      <a @click="changeTab(item.href)" :class="[item.current ? 'bg-button-hover dark:bg-gray-600 dark:text-dark-text text-white' : 'text-light-text dark:text-dark-text  hover:bg-button dark:hover:bg-gray-500 hover:text-white dark:hover:text-gray-100', 'px-3 py-2 rounded-md text-sm font-medium']">
+                        {{ $t(`navbar.${item.name}`) }}
+                      </a>
+                  </router-link>
+                </template>
+              </template>
+              <template v-else>
+                <template v-for="item in navigation" :key="item.name">
+                  <router-link :to="item.href">
+                      <a @click="changeTab(item.href)" :class="[item.current ? 'bg-button-hover dark:bg-gray-600 dark:text-dark-text text-white' : 'text-light-text dark:text-dark-text  hover:bg-button dark:hover:bg-gray-500 hover:text-white dark:hover:text-gray-100', 'px-3 py-2 rounded-md text-sm font-medium']">
+                        {{ $t(`navbar.${item.name}`) }}
+                      </a>
+                  </router-link>
+                </template>
+              </template>
             </div>
           </div>
         </div>

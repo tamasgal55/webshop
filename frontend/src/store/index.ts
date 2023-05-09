@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from '../axios'
 import { IUser } from '../interfaces/IUser'
-import { IUserProfile } from '../interfaces/IUserProfile'
+import companyCreatedEmitter from '../emitters/companyCreatedEmitter'
 
 export const useUserStore = defineStore('userData', {
     state: () => ({
@@ -48,6 +48,18 @@ export const useUserStore = defineStore('userData', {
                 name: 'Login'
             })
             this.userIsLoggedIn = false
+        },
+        async getUserData() {
+            try {
+                const response = await axios.get('/api/user/model_data')
+                if(response) {
+                    this.setUser(response.data.data)
+                    companyCreatedEmitter.emit('companyCreated')
+                }
+                return response
+            } catch(error) {
+                console.log(error)
+            }
         }
     },
     persist: true

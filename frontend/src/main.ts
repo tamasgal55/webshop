@@ -9,7 +9,8 @@ import FormKitConfig from './FormKitConfig'
 import i18n from './localization'
 import  Notifications  from 'notiwind'
 import App from './App.vue'
-import PrimeVue from 'primevue/config';
+import PrimeVue from 'primevue/config'
+import ConfirmationService from 'primevue/confirmationservice'
 
 declare module 'pinia' {
     export interface PiniaCustomProperties {
@@ -27,4 +28,5 @@ createApp(App)
     .use(plugin, FormKitConfig)
     .use(Notifications)
     .use(PrimeVue)
+    .use(ConfirmationService)
     .mount('#app')

@@ -2,12 +2,41 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { ArrowLeftOnRectangleIcon, Cog8ToothIcon, BuildingOfficeIcon} from '@heroicons/vue/24/outline'
 import { useUserStore } from '../store'
+import { onMounted, ref } from 'vue'
+import axios from '../axios'
+import ICompany from '../interfaces/ICompany'
+import companyCreatedEmitter from '../emitters/companyCreatedEmitter'
+const emit = defineEmits<{
+  (e: 'profileNavigation', href: string): void
+}>()
 
 const store = useUserStore()
 async function onLogout() {
     await store.logout()
 }
 
+companyCreatedEmitter.on('companyCreated', () => {
+  setCompanyName()
+})
+
+const company = ref<ICompany>({} as ICompany)
+onMounted(async () => {
+    setCompanyName()
+})
+
+async function setCompanyName()
+{
+    try{
+        if(store.user.company_id) {
+            const response = await axios.get(`/api/company/${store.user.company_id}`)
+            if(response) {
+                company.value = response.data.data
+            }
+        }
+    } catch(error) {
+        console.log(error)
+    }
+}
 </script>
 
 <template>
@@ -34,29 +63,52 @@ async function onLogout() {
                 <MenuItems class="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-dark-bg-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div v-if="store.userIsLoggedIn">
                         <div>
-                            <MenuItem v-slot="{ active }">
-                                <router-link to="/profile">
-                                    <a @click="$emit('profileNavigation')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
-                                        <Cog8ToothIcon :active="active" class="mr-2 h-5 w-5" aria-hidden="true" />
+                            <MenuItem as="div" v-slot="{ active }">
+                                <!--<router-link to="/profile">-->
+                                    <a @click="$emit('profileNavigation', '/profile')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
+                                        <Cog8ToothIcon class="mr-2 h-5 w-5" aria-hidden="true" />
                                         {{$t('profile.profile')}}
                                     </a>
-                                </router-link>
+                                <!--</router-link>-->
                             </MenuItem>
                         </div>
                         <div>
-                            <MenuItem v-slot="{ active }">
-                                <router-link to="/create_company">
-                                    <a @click="$emit('profileNavigation')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
-                                        <BuildingOfficeIcon :active="active" class="mr-2 h-5 w-5" aria-hidden="true" />
+                            <MenuItem as="div" v-slot="{ active }">
+                                <!--<router-link to="/admin/categories">-->
+                                    <a @click="$emit('profileNavigation', '/admin/categories')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
+                                        <Cog8ToothIcon class="mr-2 h-5 w-5" aria-hidden="true" />
+                                        {{$t('profile.admin')}}
+                                    </a>
+                                <!--</router-link>-->
+                            </MenuItem>
+                        </div>
+                        <div :key="store.user.company_id">
+                        <div v-if="!store.user.company_id">
+                            <MenuItem as="div" v-slot="{ active }">
+                                <!--<router-link to="/create_company">-->
+                                    <a @click="$emit('profileNavigation', '/create_company')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
+                                        <BuildingOfficeIcon class="mr-2 h-5 w-5" aria-hidden="true" />
                                         {{$t('profile.create_company')}}
                                     </a>
-                                </router-link>
+                                <!--</router-link>-->
                             </MenuItem>
                         </div>
+                        <div v-else>
+                            <MenuItem as="div" v-slot="{ active }">
+                                <!--<router-link :to="`/management/${company.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '')}`">-->
+                                <!--<router-link to="/management/start">-->
+                                    <a @click="$emit('profileNavigation', '/management/start')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
+                                        <BuildingOfficeIcon class="mr-2 h-5 w-5" aria-hidden="true" />
+                                        {{ company.name }}
+                                    </a>
+                                <!--</router-link>-->
+                            </MenuItem>
+                        </div>
+                        </div>
                         <div>
-                            <MenuItem v-slot="{ active }">
+                            <MenuItem as="div" v-slot="{ active }">
                                 <a :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']" @click="onLogout">
-                                    <ArrowLeftOnRectangleIcon :active="active" class="mr-2 h-5 w-5" aria-hidden="true" />
+                                    <ArrowLeftOnRectangleIcon class="mr-2 h-5 w-5" aria-hidden="true" />
                                     {{$t('profile.logout')}}
                                 </a>
                             </MenuItem>
@@ -64,21 +116,21 @@ async function onLogout() {
                     </div>
                     <div v-else>
                         <div>
-                            <MenuItem v-slot="{ active }">
-                                <router-link to="/login">
-                                    <a @click="$emit('profileNavigation')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
+                            <MenuItem as="div" v-slot="{ active }">
+                                <!--<router-link to="/login">-->
+                                    <a @click="$emit('profileNavigation', '/login')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
                                         {{$t('profile.login')}}
                                     </a>
-                                </router-link>
+                                <!--</router-link>-->
                             </MenuItem>
                         </div>
                         <div>
-                            <MenuItem v-slot="{ active }">
-                                <router-link to="/register">
-                                    <a @click="$emit('profileNavigation')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
+                            <MenuItem as="div" v-slot="{ active }">
+                                <!--<router-link to="/register">-->
+                                    <a @click="$emit('profileNavigation', '/register')" :class="['group flex w-full items-center rounded-md text-sm px-4 py-2 text-light-text dark:text-dark-text', active ? 'bg-gray-100 dark:bg-dark-bg-2' : '']">
                                         {{$t('profile.register')}}
                                     </a>
-                                </router-link>
+                                <!--</router-link>-->
                             </MenuItem>
                         </div>
                     </div>

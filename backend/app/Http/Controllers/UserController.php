@@ -7,11 +7,18 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Language;
 use App\Models\Address;
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 
 class UserController extends Controller
 {
+    public function getModelData()
+    {
+        $user = User::find(auth()->user()->id);
+        return response()->json(["data" => $user]);
+    }
+
     public function getLanguage(string $id)
     {
         return response()->json(User::findOrFail($id)->language);
@@ -83,6 +90,7 @@ class UserController extends Controller
     public function relationshipTestEndpoint()
     {
         return response()->json([
+            //['category-attributes:' => Category::findOrFail(1)->attributes]
             //['user-lang:' => User::findOrFail(1)->language],
             //['lang-user:' => Language::findOrFail(2)->users],
             //['user-address:' => User::findOrFail(1)->address],

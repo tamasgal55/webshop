@@ -6,6 +6,9 @@ import { notify } from 'notiwind'
 import { FormKitNode } from '@formkit/core'
 import changeThemeEmitter from '../emitters/changeThemeEmitter'
 import changeLanguageEmitter from '../emitters/changeLanguageEmitter'
+import { useI18n } from 'vue-i18n'
+
+const i18n = useI18n()
 
 const router = useRouter()
 const store = useUserStore()
@@ -25,8 +28,8 @@ async function onLogin() {
         notify({
             group: 'notifications',
             type: 'success',
-            title: 'Success',
-            text: 'Logged in successfully'
+            title: i18n.t('Success'),
+            text: i18n.t('login.logged_in')
         }, 2000)
         const langCode = response.data.data.language_id == 1 ? 'hu' : 'en'
         changeLanguageEmitter.emit('changeLanguage', langCode)
@@ -71,7 +74,7 @@ const showPassword = (node: FormKitNode, e: Event) => {
                   validation-visibility="dirty"
               />
               <FormKit
-                  :name="$t('login.password')"
+                  :validation-label="$t('login.password')"
                   type="password"
                   v-model="form.password"
                   :placeholder="$t('login.password')"

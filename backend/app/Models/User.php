@@ -26,7 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'phone',
         'address_id',
-        'language_id'
+        'language_id',
+        'company_id'
     ];
 
     /**
@@ -61,5 +62,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function address(): BelongsTo
     {
         return $this->belongsTo(Address::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 }

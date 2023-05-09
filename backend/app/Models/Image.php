@@ -13,12 +13,17 @@ class Image extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'image',
-        'product_id'
+        'image'
     ];
 
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
+/*
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+*/
 }
